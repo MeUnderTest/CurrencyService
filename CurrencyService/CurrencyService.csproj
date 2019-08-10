@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BL\SingleHttpClientInstance.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Currency.cs">
       <DependentUpon>CurrencyModel.tt</DependentUpon>
@@ -188,7 +189,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BL\" />
     <Folder Include="Content\" />
     <Folder Include="DAL\" />
     <Folder Include="Models\" />

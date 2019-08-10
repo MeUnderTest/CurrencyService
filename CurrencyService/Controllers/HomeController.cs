@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace CurrencyService.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApiController
     {
-        public ActionResult Index()
+        [HttpGet]
+        [Route("api/GetCurrency")]
+        public IHttpActionResult Get()
         {
-            ViewBag.Title = "Home Page";
+            if (false) return NotFound();
 
-            return View();
+            return Ok<List<string>>(new List<string>());
         }
+
     }
 }
