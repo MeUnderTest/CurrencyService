@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CurrencyService.Models
+namespace CurrencyService.Models.Enumerations
 {
-    public class Enumerations
+    public enum provider
     {
-        public enum rateHistoyPeriod
-        {
-            day,
-            week,
-            month
-        }
-        public enum currency
-        {
-            ILS,
-            USD,
-            EUR,
-            JPY,
-            GBP
-        }
-
-        public enum provider
-        {
-            Yahoo,
-            Google,
-            Bloomberg,
-            XE
-        }
+        Yahoo,
+        Google,
+        Bloomberg,
+        XE
     }
+
+    public enum rateHistoyPeriod
+    {
+        day,
+        week,
+        month
+    }
+    public enum currency
+    {
+        ILS,
+        USD,
+        EUR,
+        JPY,
+        GBP
+    }
+
 }

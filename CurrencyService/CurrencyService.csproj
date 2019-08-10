@@ -134,7 +134,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BL\CurrencyBL.cs" />
+    <Compile Include="BL\Model\CurrencyBO.cs" />
     <Compile Include="DAL\CurrencyDAL.cs" />
+    <Compile Include="DAL\Model\CurrencyDO.cs" />
     <Compile Include="Models\CurrencyProvider.cs" />
     <Compile Include="BL\RateHistoryRequestFactory.cs" />
     <Compile Include="BL\SingleHttpClientInstance.cs" />
@@ -164,6 +166,12 @@
     <Compile Include="Models\RateHistoryRequest.cs" />
     <Compile Include="Models\RateHistoryRequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\EnumUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CurrencyDatabase.mdf" />
@@ -215,6 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

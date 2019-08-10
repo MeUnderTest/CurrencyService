@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using static CurrencyService.Models.Enumerations;
+﻿using CurrencyService.Models.Enumerations;
+using System;
+
 
 namespace CurrencyService.Models
 {

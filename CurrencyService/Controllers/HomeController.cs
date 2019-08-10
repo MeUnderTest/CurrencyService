@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurrencyService.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +16,8 @@ namespace CurrencyService.Controllers
         [Route("api/GetCurrency")]
         public IHttpActionResult Get()
         {
+            CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+
             if (false) return NotFound();
 
             return Ok<List<string>>(new List<string>());

@@ -1,9 +1,9 @@
 ﻿using CurrencyService.Models;
+using CurrencyService.Models.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static CurrencyService.Models.Enumerations;
 
 namespace CurrencyService.BL
 {
