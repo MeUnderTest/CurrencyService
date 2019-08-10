@@ -133,6 +133,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BL\CurrencyBL.cs" />
+    <Compile Include="DAL\CurrencyDAL.cs" />
+    <Compile Include="Models\CurrencyProvider.cs" />
+    <Compile Include="BL\RateHistoryRequestFactory.cs" />
     <Compile Include="BL\SingleHttpClientInstance.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Currency.cs">
@@ -156,6 +160,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enumerations.cs" />
+    <Compile Include="Models\RateHistoryRequest.cs" />
+    <Compile Include="Models\RateHistoryRequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,8 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-    <Folder Include="DAL\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
