@@ -1,6 +1,7 @@
 ﻿using CurrencyService.DAL.Model;
 using CurrencyService.Models.Enumerations;
 using CurrencyService.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,5 +28,21 @@ namespace CurrencyService.DAL
             }
 
         }
+
+        public static async Task AddCurrencyAsync(string currencyName, string currencyService, decimal currencyValue)
+        {
+            using (var context = new CurrencyEntities())
+            {
+
+                context.Currencies.Add(new Currency() {
+                    CurrencyLastUpdate = DateTime.Now,
+                    CurrencyName = currencyName,
+                    CurrencyService = currencyService
+                });
+                await context.SaveChangesAsync();
+            }
+        }
     }
+
+
 }

@@ -4,22 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CurrencyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CurrencyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Currency">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CurrencyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CurrencyValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencyValue" Type="decimal" Precision="18" Scale="10" />
           <Property Name="CurrencyLastUpdate" Type="datetime" />
           <Property Name="CurrencyService" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="CurrencyModelStoreContainer">
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CurrencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -29,7 +28,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CurrencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CurrencyValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyValue" Type="String" />
           <Property Name="CurrencyLastUpdate" Type="DateTime" Precision="3" />
           <Property Name="CurrencyService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
