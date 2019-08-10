@@ -1,9 +1,5 @@
 ﻿using CurrencyService.Models;
 using CurrencyService.Models.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CurrencyService.BL
 {
@@ -14,7 +10,7 @@ namespace CurrencyService.BL
 
             if (currencyProvder == provider.Yahoo)
             {
-                return new RateHistoryRequest()
+                return new YahooRateRequest(currencyProvder, baseCurrency, termCurrency)
                 {
                     method = "spotRateHistory",
                     data = new Data()

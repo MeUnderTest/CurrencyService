@@ -31,5 +31,14 @@ namespace CurrencyService.Properties {
                 return ((global::CurrencyService.Models.Enumerations.provider)(this["ProviderSetting"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://adsynth-ofx-quotewidget-prod.herokuapp.com/api/1")]
+        public global::System.Uri YahooUrlSetting {
+            get {
+                return ((global::System.Uri)(this["YahooUrlSetting"]));
+            }
+        }
     }
 }

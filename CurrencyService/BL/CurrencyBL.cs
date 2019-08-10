@@ -24,5 +24,10 @@ namespace CurrencyService.BL
                 CurrencyValue = x.CurrencyValue
             }).ToList();
         }
+
+        public static async Task AddCurrencyAsync(string currencyName, string currencyService, float currencyValue) {
+
+            await CurrencyDAL.AddCurrencyAsync(currencyName, currencyService, currencyValue);
+        }
     }
 }

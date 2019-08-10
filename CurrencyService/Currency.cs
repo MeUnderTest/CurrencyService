@@ -16,8 +16,8 @@ namespace CurrencyService
     {
         public int Id { get; set; }
         public string CurrencyName { get; set; }
-        public string CurrencyValue { get; set; }
-        public Nullable<System.DateTime> CurrencyLastUpdate { get; set; }
+        public double CurrencyValue { get; set; }
+        public System.DateTime CurrencyLastUpdate { get; set; }
         public string CurrencyService { get; set; }
     }
 }

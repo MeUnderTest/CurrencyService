@@ -29,7 +29,7 @@ namespace CurrencyService.DAL
 
         }
 
-        public static async Task AddCurrencyAsync(string currencyName, string currencyService, decimal currencyValue)
+        public static async Task AddCurrencyAsync(string currencyName, string currencyService, float currencyValue)
         {
             using (var context = new CurrencyEntities())
             {
@@ -37,7 +37,8 @@ namespace CurrencyService.DAL
                 context.Currencies.Add(new Currency() {
                     CurrencyLastUpdate = DateTime.Now,
                     CurrencyName = currencyName,
-                    CurrencyService = currencyService
+                    CurrencyService = currencyService,
+                    CurrencyValue = currencyValue
                 });
                 await context.SaveChangesAsync();
             }

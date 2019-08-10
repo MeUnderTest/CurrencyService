@@ -1,14 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using CurrencyService.Models;
+using Newtonsoft.Json;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace CurrencyService.BL
 {
@@ -21,9 +18,9 @@ namespace CurrencyService.BL
             httpClient = new HttpClient();
         }
 
-        public static async Task PostStreamAsync<T>(object content, Uri url, CancellationToken token)
+        public static async Task PostStreamAsync(RateHistoryRequestBase content, CancellationToken token)
         {
-            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Post, content.providerUrl))
             using (var httpContent = CreateHttpContent(content))
             {
                 request.Content = httpContent;
@@ -32,29 +29,23 @@ namespace CurrencyService.BL
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                     .ConfigureAwait(false))
                 {
-
                     if (response.IsSuccessStatusCode)
                     {
                         while (!token.IsCancellationRequested)
                         {
                             string jsonResponse = await response.Content.ReadAsStringAsync();
-
-                            //T rateResponse = JsonConvert.DeserializeObject<T>(jsonResponse);
-
-                            //Console.WriteLine(rateResponse.data.CurrentInterbankRate);
-
+                                
                             await Task.Delay(1000);
                         }
                         throw new TaskCanceledException();
                     }
-
                 }
             }
         }
 
-        public static async Task PostStreamAsync<T>(object content, Uri url)
+        public static async Task<string> PostStreamAsync(RateHistoryRequestBase content)
         {
-            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Post, content.providerUrl))
             using (var httpContent = CreateHttpContent(content))
             {
                 request.Content = httpContent;
@@ -66,9 +57,12 @@ namespace CurrencyService.BL
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonResponse = await response.Content.ReadAsStringAsync();
-                        // Save to DB
+                        return jsonResponse;
                     }
-
+                    else
+                    {
+                        return string.Empty;
+                    }
                 }
             }
         }

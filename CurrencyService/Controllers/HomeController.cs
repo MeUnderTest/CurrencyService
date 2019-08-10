@@ -14,9 +14,9 @@ namespace CurrencyService.Controllers
     {
         [HttpGet]
         [Route("api/GetCurrency")]
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> GetAsync()
         {
-            CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+            await CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
 
             if (false) return NotFound();
 

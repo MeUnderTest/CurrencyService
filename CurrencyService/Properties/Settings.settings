@@ -5,5 +5,8 @@
     <Setting Name="ProviderSetting" Type="CurrencyService.Models.Enumerations.provider" Scope="Application">
       <Value Profile="(Default)">Yahoo</Value>
     </Setting>
+    <Setting Name="YahooUrlSetting" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)">https://adsynth-ofx-quotewidget-prod.herokuapp.com/api/1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
