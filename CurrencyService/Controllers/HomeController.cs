@@ -10,8 +10,8 @@ namespace CurrencyService.Controllers
     public class HomeController : ApiController
     {
         [HttpGet]
-        [Route("api/GetCurrencies")]
-        public async Task<IHttpActionResult> GetCurrencies()
+        [Route("api/GetCurrency")]
+        public async Task<IHttpActionResult> GetAsync()
         {
             IEnumerable<CurrencyBO> CurrencyBOList = await CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
 
@@ -21,7 +21,7 @@ namespace CurrencyService.Controllers
         }
         /*
          
-        Request URL: http://localhost:60463/api/GetCurrencies
+        Request URL: http://localhost:60463/api/GetCurrency
 
         Response: 
          
