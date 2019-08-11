@@ -11,7 +11,7 @@ namespace CurrencyService.Controllers
     {
         [HttpGet]
         [Route("api/GetCurrency")]
-        public async Task<IHttpActionResult> GetAsync()
+        public async Task<IHttpActionResult> Get()
         {
             IEnumerable<CurrencyBO> CurrencyBOList = await CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
 
