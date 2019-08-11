@@ -5,10 +5,21 @@ using System.Web;
 
 namespace CurrencyService.Models
 {
-    public abstract class RateHistoryResponseBase
+    public class RateHistoryResponseBase : IRateHistory
     {
-        abstract public string CurrencyName { get;}
-        abstract public float CurrencyValue { get;}
-        abstract public string CurrencyService { get;}
+        virtual public string GetCurrencyName()
+        {
+            throw new NotImplementedException();
+        }
+
+        virtual public string GetCurrencyService()
+        {
+            throw new NotImplementedException();
+        }
+
+        virtual public double GetCurrencyValue()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,7 +13,8 @@ namespace CurrencyService.BL
 
         public static async Task<IEnumerable<CurrencyBO>> GetCurrenciesAsync(provider provider)
         {
-            CurrencyUpdater.UpdateCurrencies(provider);
+            Task t = Task.Factory.StartNew(() => CurrencyUpdater.UpdateCurrencies(provider) );
+            t.Wait();
 
             IEnumerable<CurrencyDO> Currencies = await CurrencyDAL.GetCurrenciesAsync(provider);
 
@@ -25,9 +26,9 @@ namespace CurrencyService.BL
             }).ToList();
         }
 
-        public static async Task AddCurrencyAsync(string currencyName, string currencyService, float currencyValue) {
+        public static void AddCurrency(string currencyName, string currencyService, double currencyValue) {
 
-            await CurrencyDAL.AddCurrencyAsync(currencyName, currencyService, currencyValue);
+            CurrencyDAL.AddCurrency(currencyName, currencyService, currencyValue);
         }
     }
 }

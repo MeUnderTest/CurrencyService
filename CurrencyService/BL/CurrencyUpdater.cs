@@ -1,9 +1,7 @@
 ﻿using CurrencyService.Models;
 using CurrencyService.Models.Enumerations;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace CurrencyService.BL
 {
@@ -20,42 +18,19 @@ namespace CurrencyService.BL
                 RateHistoryRequestFactory.CreateRateHistory(currency.EUR, currency.GBP,providerName)
             };
 
-            RateChangesParallel(rateRequests);
-        }
+            rateRequests.ForEach(rateRequest =>
+            {
+                Task<string> jsonResponseTask = SingleHttpClientInstance.PostStreamAsync(rateRequest);
+                jsonResponseTask.Wait();
 
-        private static void RateChangesParallel(List<RateHistoryRequestBase> rateRequests)
-        {
-            Parallel.ForEach(
-                rateRequests,
-                new ParallelOptions { MaxDegreeOfParallelism = 10 },
-                async rateRequest =>
+                if (jsonResponseTask.IsCompleted)
                 {
-                    try
-                    {
-                        using (var transactionScope = new TransactionScope(
-                            TransactionScopeOption.Required,
-                            new TransactionOptions { IsolationLevel = IsolationLevel.Serializable })){
+                    RateHistoryResponseBase response = RateHistoryResponseFactory.DeserializeResponse(rateRequest.providerName, rateRequest.termRate, rateRequest.baseRate,jsonResponseTask.Result);
 
-                            //Task<string> jsonResponse = await Task.Factory.StartNew(() => SingleHttpClientInstance.PostStreamAsync(rateRequest));
-
-                            string jsonResponse = await SingleHttpClientInstance.PostStreamAsync(rateRequest);
-
-                            //if (jsonResponse.IsCompleted)
-                            //{
-                                RateHistoryResponseBase response=  RateHistoryResponseFactory.DeserializeResponse(rateRequest.providerName, jsonResponse);
-
-                                await CurrencyBL.AddCurrencyAsync(response.CurrencyName.ToString(), response.CurrencyService, response.CurrencyValue);
-                            //}
-
-                            transactionScope.Complete();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-
-                        throw new ApplicationException("Some items might not be updated", e);
-                    }
-                });
+                    CurrencyBL.AddCurrency(response.GetCurrencyName().ToString(), response.GetCurrencyService(), response.GetCurrencyValue());
+                }
+                
+            });
         }
     }
 }

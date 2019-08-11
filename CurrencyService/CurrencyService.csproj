@@ -143,6 +143,7 @@
     <Compile Include="DAL\CurrencyDAL.cs" />
     <Compile Include="DAL\Model\CurrencyDO.cs" />
     <Compile Include="Models\CurrencyProvider.cs" />
+    <Compile Include="Models\IRateHistory.cs" />
     <Compile Include="Models\RateHistoryRequestFactory.cs" />
     <Compile Include="BL\SingleHttpClientInstance.cs" />
     <Compile Include="Controllers\HomeController.cs" />

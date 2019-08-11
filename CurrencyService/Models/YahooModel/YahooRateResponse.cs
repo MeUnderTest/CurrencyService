@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CurrencyService.Models.Enumerations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,25 +10,28 @@ namespace CurrencyService.Models.YahooModel
 {
 #pragma warning disable IDE1006
 
-    public class YahooRateResponse : RateHistoryResponseBase
+    public class YahooRateResponse : RateHistoryResponseBase, IRateHistory
     {
-        private string _provider;
-        private string _currencyName;
+        public string CurrencyName { get;  set; }
 
         [JsonProperty("data")]
         public responseData data { get; set; }
-        [IgnoreDataMember]
-        public override float CurrencyValue { get { return data.CurrentInterbankRate; } }
-        [IgnoreDataMember]
-        public override string CurrencyName { get { return this._currencyName; } }
-        [IgnoreDataMember]
-        public override string CurrencyService { get { return this._provider; } }
 
-        public YahooRateResponse(string provider, string currencyName)
+        public override string GetCurrencyName()
         {
-            this._provider = provider;
-            this._currencyName = currencyName;
+            return CurrencyName;
         }
+
+        public override double GetCurrencyValue()
+        {
+            return data.CurrentInterbankRate;
+        }
+
+        public override string GetCurrencyService()
+        {
+            return provider.Yahoo.ToString();
+        }
+
     }
 
     public class responseData

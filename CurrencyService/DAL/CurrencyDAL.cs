@@ -29,18 +29,29 @@ namespace CurrencyService.DAL
 
         }
 
-        public static async Task AddCurrencyAsync(string currencyName, string currencyService, float currencyValue)
+        public static void AddCurrency(string currencyName, string currencyService, double currencyValue)
         {
             using (var context = new CurrencyEntities())
             {
+                var result = context.Currencies.Where(x => x.CurrencyName == currencyName && x.CurrencyService == currencyService).FirstOrDefault();
 
-                context.Currencies.Add(new Currency() {
-                    CurrencyLastUpdate = DateTime.Now,
-                    CurrencyName = currencyName,
-                    CurrencyService = currencyService,
-                    CurrencyValue = currencyValue
-                });
-                await context.SaveChangesAsync();
+                if (result != null)
+                {
+                    result.CurrencyLastUpdate = DateTime.Now;
+                    result.CurrencyValue = currencyValue;
+                }
+                else
+                {
+                    context.Currencies.Add(new Currency()
+                    {
+                        CurrencyLastUpdate = DateTime.Now,
+                        CurrencyName = currencyName,
+                        CurrencyService = currencyService,
+                        CurrencyValue = currencyValue
+                    });
+                }
+
+                context.SaveChanges();
             }
         }
     }
