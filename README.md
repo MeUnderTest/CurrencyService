@@ -1,5 +1,5 @@
 # CurrencyService
-Currency Service
+Currency Service Get:
 
   Request URL: http://localhost:60463/api/GetCurrency
 
@@ -31,3 +31,7 @@ Currency Service
         "CurrencyService": 0
     }
  
+ 
+ Currency Service Update:
+
+  Request URL: http://localhost:60463/api/UpdateCurrency
