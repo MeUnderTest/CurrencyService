@@ -137,7 +137,7 @@
     <Compile Include="BL\CurrencyBL.cs" />
     <Compile Include="BL\CurrencyUpdater.cs" />
     <Compile Include="BL\Model\CurrencyBO.cs" />
-    <Compile Include="Currency.cs">
+    <Compile Include="DAL\Currency.cs">
       <DependentUpon>CurrencyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\CurrencyDAL.cs" />
@@ -147,17 +147,17 @@
     <Compile Include="Models\RateHistoryRequestFactory.cs" />
     <Compile Include="BL\SingleHttpClientInstance.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="CurrencyModel.Context.cs">
+    <Compile Include="DAL\CurrencyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyModel.cs">
+    <Compile Include="DAL\CurrencyModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyModel.Designer.cs">
+    <Compile Include="DAL\CurrencyModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyModel.edmx</DependentUpon>
@@ -184,12 +184,12 @@
     <Content Include="App_Data\CurrencyDatabase_log.ldf">
       <DependentUpon>CurrencyDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="CurrencyModel.Context.tt">
+    <Content Include="DAL\CurrencyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurrencyModel.Context.cs</LastGenOutput>
       <DependentUpon>CurrencyModel.edmx</DependentUpon>
     </Content>
-    <Content Include="CurrencyModel.tt">
+    <Content Include="DAL\CurrencyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CurrencyModel.edmx</DependentUpon>
       <LastGenOutput>CurrencyModel.cs</LastGenOutput>
@@ -217,13 +217,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CurrencyModel.edmx">
+    <EntityDeploy Include="DAL\CurrencyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CurrencyModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CurrencyModel.edmx.diagram">
+    <Content Include="DAL\CurrencyModel.edmx.diagram">
       <DependentUpon>CurrencyModel.edmx</DependentUpon>
     </Content>
   </ItemGroup>

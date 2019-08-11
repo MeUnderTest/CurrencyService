@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CurrencyService
+namespace CurrencyService.DAL
 {
     using System;
     using System.Data.Entity;
