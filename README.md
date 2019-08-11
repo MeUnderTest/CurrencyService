@@ -5,7 +5,7 @@ Currency Service
 
   Response: 
          
- [
+ 
     {
         "CurrencyName": "USD/ILS",
         "CurrencyValue": 3.4449000358581543,
@@ -30,4 +30,4 @@ Currency Service
         "CurrencyLastUpdate": "2019-08-11T23:14:15.08",
         "CurrencyService": 0
     }
-  ]
+ 
