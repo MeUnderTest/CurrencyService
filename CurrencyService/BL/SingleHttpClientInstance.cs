@@ -18,7 +18,7 @@ namespace CurrencyService.BL
             httpClient = new HttpClient();
         }
 
-        public static async Task PostStreamAsync(RateHistoryRequestBase content, CancellationToken token)
+        public static async Task stringPostStreamAsync(RateHistoryRequestBase content, CancellationToken token)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, content.providerUrl))
             using (var httpContent = CreateHttpContent(content))
@@ -34,8 +34,15 @@ namespace CurrencyService.BL
                         while (!token.IsCancellationRequested)
                         {
                             string jsonResponse = await response.Content.ReadAsStringAsync();
-                                
+
+                            // ToDo: decouple BL code from  SingleHttpClientInstance
+
+                            RateHistoryResponseBase responseBase = RateHistoryResponseFactory.DeserializeResponse(content.providerName, content.termRate, content.baseRate, jsonResponse);
+
+                            CurrencyBL.AddCurrency(responseBase.GetCurrencyName().ToString(), responseBase.GetCurrencyService(), responseBase.GetCurrencyValue());
+
                             await Task.Delay(1000);
+
                         }
                         throw new TaskCanceledException();
                     }

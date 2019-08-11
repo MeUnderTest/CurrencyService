@@ -19,6 +19,14 @@ namespace CurrencyService.Controllers
 
             return Ok<IEnumerable<CurrencyBO>>(CurrencyBOList);
         }
+
+        [HttpGet]
+        [Route("api/UpdateCurrency")]
+        public async Task Update()
+        {
+            await CurrencyBL.UpdateCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+        }
+
         /*
          
         Request URL: http://localhost:60463/api/GetCurrency
