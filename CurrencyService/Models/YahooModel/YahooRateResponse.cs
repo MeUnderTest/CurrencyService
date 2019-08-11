@@ -7,6 +7,8 @@ using System.Web;
 
 namespace CurrencyService.Models.YahooModel
 {
+#pragma warning disable IDE1006
+
     public class YahooRateResponse : RateHistoryResponseBase
     {
         private string _provider;
@@ -15,11 +17,11 @@ namespace CurrencyService.Models.YahooModel
         [JsonProperty("data")]
         public responseData data { get; set; }
         [IgnoreDataMember]
-        public override float CurrencyValue { get => data.CurrentInterbankRate;}
+        public override float CurrencyValue { get { return data.CurrentInterbankRate; } }
         [IgnoreDataMember]
-        public override string CurrencyName { get => this._currencyName; }
+        public override string CurrencyName { get { return this._currencyName; } }
         [IgnoreDataMember]
-        public override string CurrencyService { get => this._provider; }
+        public override string CurrencyService { get { return this._provider; } }
 
         public YahooRateResponse(string provider, string currencyName)
         {
@@ -44,4 +46,6 @@ namespace CurrencyService.Models.YahooModel
         public float InterbankRate { get; set; }
         public float InverseInterbankRate { get; set; }
     }
+#pragma warning restore IDE1006
+
 }

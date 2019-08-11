@@ -13,7 +13,7 @@ namespace CurrencyService.BL
 
         public static async Task<IEnumerable<CurrencyBO>> GetCurrenciesAsync(provider provider)
         {
-            // Update DB
+            CurrencyUpdater.UpdateCurrencies(provider);
 
             IEnumerable<CurrencyDO> Currencies = await CurrencyDAL.GetCurrenciesAsync(provider);
 

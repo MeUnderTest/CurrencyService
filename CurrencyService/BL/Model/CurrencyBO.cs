@@ -9,7 +9,7 @@ namespace CurrencyService.BL.Model
     public class CurrencyBO
     {
         public string CurrencyName { get; set; }
-        public float CurrencyValue { get; set; }
+        public double CurrencyValue { get; set; }
         public DateTime? CurrencyLastUpdate { get; set; }
         public provider CurrencyService { get; set; }
     }

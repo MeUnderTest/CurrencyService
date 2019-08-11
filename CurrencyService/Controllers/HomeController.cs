@@ -1,4 +1,5 @@
 ﻿using CurrencyService.BL;
+using CurrencyService.BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace CurrencyService.Controllers
         [Route("api/GetCurrency")]
         public async Task<IHttpActionResult> GetAsync()
         {
-            await CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+            IEnumerable<CurrencyBO> CurrencyBOList = await CurrencyBL.GetCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
 
-            if (false) return NotFound();
+            if (!CurrencyBOList.Any()) return NotFound();
 
             return Ok<List<string>>(new List<string>());
         }

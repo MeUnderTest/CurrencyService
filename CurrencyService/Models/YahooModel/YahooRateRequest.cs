@@ -9,12 +9,14 @@ namespace CurrencyService.Models
 {
     public class YahooRateRequest : RateHistoryRequestBase
     {
+#pragma warning disable IDE1006
+
         [IgnoreDataMember]
         public override currency baseRate { get; }
         [IgnoreDataMember]
         public override currency termRate { get; }
         [IgnoreDataMember]
-        public override Uri providerUrl { get => Properties.Settings.Default.YahooUrlSetting; }
+        public override Uri providerUrl { get {return Properties.Settings.Default.YahooUrlSetting; } }
         [IgnoreDataMember]
         public override provider providerName { get; }
 
@@ -35,4 +37,6 @@ namespace CurrencyService.Models
         public string term { get; set; }
         public string period { get; set; }
     }
+#pragma warning restore IDE1006
+
 }
