@@ -1,5 +1,6 @@
 ﻿using CurrencyService.Models;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -18,7 +19,7 @@ namespace CurrencyService.BL
             httpClient = new HttpClient();
         }
 
-        public static async Task stringPostStreamAsync(RateHistoryRequestBase content, CancellationToken token)
+        public static async Task stringPostStreamAsync(RateHistoryRequestBase content, CancellationToken token, IProgress<string> rateResponse)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, content.providerUrl))
             using (var httpContent = CreateHttpContent(content))
@@ -35,13 +36,9 @@ namespace CurrencyService.BL
                         {
                             string jsonResponse = await response.Content.ReadAsStringAsync();
 
-                            // ToDo: decouple BL code from  SingleHttpClientInstance
+                            rateResponse.Report(jsonResponse);
 
-                            RateHistoryResponseBase responseBase = RateHistoryResponseFactory.DeserializeResponse(content.providerName, content.termRate, content.baseRate, jsonResponse);
-
-                            CurrencyBL.AddCurrency(responseBase.GetCurrencyName().ToString(), responseBase.GetCurrencyService(), responseBase.GetCurrencyValue());
-
-                            await Task.Delay(1000);
+                            await Task.Delay(Properties.Settings.Default.UpdateDelaySetting);
 
                         }
                         throw new TaskCanceledException();

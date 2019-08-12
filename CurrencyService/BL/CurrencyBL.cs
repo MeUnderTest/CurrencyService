@@ -31,7 +31,7 @@ namespace CurrencyService.BL
             CurrencyDAL.AddCurrency(currencyName, currencyService, currencyValue);
         }
 
-        public static async Task UpdateCurrenciesAsync(provider provider) {
+        public static void UpdateCurrenciesAsync(provider provider) {
             Task t = Task.Factory.StartNew(() => CurrencyUpdater.UpdateCurrenciesService(provider));
             t.Wait();
         }

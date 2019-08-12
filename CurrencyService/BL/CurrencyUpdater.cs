@@ -1,5 +1,6 @@
 ﻿using CurrencyService.Models;
 using CurrencyService.Models.Enumerations;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace CurrencyService.BL
 
         public static void UpdateCurrencies(provider providerName)
         {
-            // ToDO: this list need to fill dynamiclly from config file
+            // ToDO: this list need to fill dynamically from config file
             List<RateHistoryRequestBase> rateRequests = new List<RateHistoryRequestBase>() {
                 RateHistoryRequestFactory.CreateRateHistory(currency.ILS, currency.USD,providerName),
                 RateHistoryRequestFactory.CreateRateHistory(currency.EUR, currency.USD,providerName),
@@ -36,7 +37,7 @@ namespace CurrencyService.BL
 
         public static void UpdateCurrenciesService(provider providerName)
         {
-            // ToDO: this list need to fill dynamiclly from config file
+            // ToDo: this list need to fill dynamically from config file
             List<RateHistoryRequestBase> rateRequests = new List<RateHistoryRequestBase>() {
                 RateHistoryRequestFactory.CreateRateHistory(currency.ILS, currency.USD,providerName),
                 RateHistoryRequestFactory.CreateRateHistory(currency.EUR, currency.USD,providerName),
@@ -48,7 +49,16 @@ namespace CurrencyService.BL
              {
                  using (var cancellationTokenSource = new CancellationTokenSource())
                  {
-                     await SingleHttpClientInstance.stringPostStreamAsync(rateRequest, cancellationTokenSource.Token);
+
+                     IProgress<string> p = new Progress<string>(res =>
+                     {
+                         RateHistoryResponseBase responseBase = RateHistoryResponseFactory.DeserializeResponse(rateRequest.providerName, rateRequest.termRate, rateRequest.baseRate, res);
+
+                         CurrencyBL.AddCurrency(responseBase.GetCurrencyName().ToString(), responseBase.GetCurrencyService(), responseBase.GetCurrencyValue());
+                     });
+
+                     await SingleHttpClientInstance.stringPostStreamAsync(rateRequest, cancellationTokenSource.Token, p);                    
+                     
                  }
 
              });
