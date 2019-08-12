@@ -22,9 +22,9 @@ namespace CurrencyService.Controllers
 
         [HttpGet]
         [Route("api/UpdateCurrency")]
-        public async Task Update()
+        public void Update()
         {
-            await CurrencyBL.UpdateCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+            CurrencyBL.UpdateCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
         }
 
         /*
