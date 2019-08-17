@@ -2,7 +2,9 @@
 using CurrencyService.BL.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace CurrencyService.Controllers
@@ -20,11 +22,16 @@ namespace CurrencyService.Controllers
             return Ok<IEnumerable<CurrencyBO>>(CurrencyBOList);
         }
 
-        [HttpGet]
+        [HttpGet()]
         [Route("api/UpdateCurrency")]
-        public void Update()
+        public void Update(CancellationToken cancellationToken)
         {
-            CurrencyBL.UpdateCurrenciesAsync(Properties.Settings.Default.ProviderSetting);
+            var disconnectedToken = Request.GetCancellationToken();
+
+            var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, disconnectedToken);
+
+
+            CurrencyBL.UpdateCurrenciesAsync(Properties.Settings.Default.ProviderSetting, source.Token);
         }
 
         /*

@@ -4,6 +4,7 @@ using CurrencyService.DAL.Model;
 using CurrencyService.Models.Enumerations;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CurrencyService.BL
@@ -31,8 +32,8 @@ namespace CurrencyService.BL
             CurrencyDAL.AddCurrency(currencyName, currencyService, currencyValue);
         }
 
-        public static void UpdateCurrenciesAsync(provider provider) {
-            Task t = Task.Factory.StartNew(() => CurrencyUpdater.UpdateCurrenciesService(provider));
+        public static void UpdateCurrenciesAsync(provider provider, CancellationToken cancellationToken) {
+            Task t = Task.Factory.StartNew(() => CurrencyUpdater.UpdateCurrenciesService(provider, cancellationToken));
             t.Wait();
         }
     }

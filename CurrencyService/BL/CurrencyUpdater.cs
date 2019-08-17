@@ -35,7 +35,7 @@ namespace CurrencyService.BL
             });
         }
 
-        public static void UpdateCurrenciesService(provider providerName)
+        public static void UpdateCurrenciesService(provider providerName, CancellationToken cancellationToken)
         {
             // ToDo: this list need to fill dynamically from config file
             List<RateHistoryRequestBase> rateRequests = new List<RateHistoryRequestBase>() {
@@ -47,19 +47,14 @@ namespace CurrencyService.BL
 
             Parallel.ForEach(rateRequests, async rateRequest =>
              {
-                 using (var cancellationTokenSource = new CancellationTokenSource())
-                 {
+                IProgress<string> p = new Progress<string>(res =>
+                {
+                    RateHistoryResponseBase responseBase = RateHistoryResponseFactory.DeserializeResponse(rateRequest.providerName, rateRequest.termRate, rateRequest.baseRate, res);
 
-                     IProgress<string> p = new Progress<string>(res =>
-                     {
-                         RateHistoryResponseBase responseBase = RateHistoryResponseFactory.DeserializeResponse(rateRequest.providerName, rateRequest.termRate, rateRequest.baseRate, res);
+                    CurrencyBL.AddCurrency(responseBase.GetCurrencyName().ToString(), responseBase.GetCurrencyService(), responseBase.GetCurrencyValue());
+                });
 
-                         CurrencyBL.AddCurrency(responseBase.GetCurrencyName().ToString(), responseBase.GetCurrencyService(), responseBase.GetCurrencyValue());
-                     });
-
-                     await SingleHttpClientInstance.stringPostStreamAsync(rateRequest, cancellationTokenSource.Token, p);                    
-                     
-                 }
+                await SingleHttpClientInstance.stringPostStreamAsync(rateRequest, cancellationToken, p);                    
 
              });
         }

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BL\CurrencyBL.cs" />
     <Compile Include="BL\CurrencyUpdater.cs" />
+    <Compile Include="BL\HttpApiExtensions.cs" />
     <Compile Include="BL\Model\CurrencyBO.cs" />
     <Compile Include="DAL\Currency.cs">
       <DependentUpon>CurrencyModel.tt</DependentUpon>
